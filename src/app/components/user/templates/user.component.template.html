@@ -1,0 +1,50 @@
+<h1>Hello {{ first_name }} {{ last_name }}</h1>
+<h2>Personal Info</h2>
+<p>Your email is {{ email }}</p>
+<hr>
+<pre>Your address is {{ address | json:4 }}</pre>
+<hr>
+<h2>Address</h2>
+<table>
+<tr>
+  <th>Street</th>
+  <th>City</th>
+  <th>District</th>
+  <th>Country</th>
+</tr>
+<tr>
+  <td>{{ address.street }}</td>
+  <td>{{ address.city }}</td>
+  <td>{{ address.district }}</td>
+  <td>{{ address.country }}</td>
+</tr>
+</table><br><br>
+<hr>
+<h2>Hobbies</h2>
+<button (click)="toggleHobbies()">{{ showHobbies ? "Hide" : "Show" }} Hobbies</button><br><br>
+<div *ngIf="showHobbies">
+<h3>Hobbies</h3>
+<ul>
+  <li *ngFor="let hobby of hobbies; let i = index">{{ hobby }} <button (click)="deleteHobby(index)">X</button></li>
+</ul>
+</div>
+<form (submit)="addHobby(hobby.value)">
+<label for="hobby">Add a hobby</label> <input type="text" name="hobby" id="hobby" #hobby />
+</form>
+<hr>
+<h2>Edit Personal Info</h2>
+<ul>
+<li><label for="first_name">First name </label> <input type="text" name="first_name" id="first_name" [(ngModel)]="first_name"/></li>
+<li><label for="last_name">Last name</label> <input type="text" name="last_name" id="last_name" [(ngModel)]="last_name"/></li>
+<li><label for="email">Email</label> <input type="text" name="email" id="email" [(ngModel)]="email"/></li>
+<li><label for="street">Street</label> <input type="text" name="street" id="street" [(ngModel)]="address.street"/></li>
+<li><label for="city">City</label> <input type="text" name="city" id="city" [(ngModel)]="address.city"/></li>
+<li><label for="district">District</label> <input type="text" name="district" id="district" [(ngModel)]="address.district"/></li>
+<li><label for="country">Country</label> <input type="text" name="country" id="country" [(ngModel)]="address.country"/></li>
+</ul>
+<hr>
+<h2>Recent Posts</h2>
+<div *ngFor="let post of posts;">
+<h3>{{ post.title }}</h3>
+<p>{{ post.body }}</p>
+</div>
